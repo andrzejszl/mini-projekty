@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  max-width: 1280px;
+  font-family: arial, sans-serif;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.wrapper {
+  min-height: 100vh;
+  padding: 3% 0;
+  background-color: #F5EDDC;
+}
+
+h1.title {
+  font-size: 4rem;
+  letter-spacing: 2px;
+  margin-bottom: 5%;
+  padding: 2% 0;
+  background-color: #ccc;
+}
+
+.drum {
+  background-color: #ccc;
+  display: flex;
+}
+.drum .drum__line {
+  width: 100%;
+  height: 30vh;
+  min-height: 200px;
+  margin: 5%;
+  background-color: #A2B5BB;
+}
+
+.controls {
+  margin-top: 5%;
+  background-color: #EB1D36;
+  padding: 3% 0;
+}
+.controls .controls__rate {
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 2rem;
+  width: 30vw;
+  min-width: 200px;
+  max-width: 300px;
+  margin-right: 10px;
+  box-shadow: 0 0 5px 2px #191919;
+  text-align: center;
+}
+.controls .controls__rate::-moz-placeholder {
+  padding-left: 200px;
+}
+.controls .controls__rate:-ms-input-placeholder {
+  padding-left: 200px;
+}
+.controls .controls__rate::placeholder {
+  padding-left: 200px;
+}
+.controls .controls__rate:focus {
+  outline: 3px solid #191919;
+}
+.controls .controls__button {
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  width: 20vw;
+  min-width: 100px;
+  max-width: 200px;
+  background-color: #191919;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.controls .controls__button:hover {
+  background-color: black;
+}
+
+.statistics {
+  font-size: 2rem;
+  text-align: left;
+  padding-left: 5%;
+}
+.statistics .statistics__money {
+  margin: 2% 0;
+}
+.statistics span {
+  font-weight: bold;
+  font-size: 2.5rem;
+}/*# sourceMappingURL=style.css.map */
