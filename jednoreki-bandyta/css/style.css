@@ -97,4 +97,36 @@ h1.title {
 .statistics span {
   font-weight: bold;
   font-size: 2.5rem;
+}
+
+.error {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 480px;
+  max-width: 100vw;
+  height: 300px;
+  max-height: 100vh;
+  background-color: #CFD2CF;
+  border: 1px solid #EB1D36;
+}
+.error .error__text {
+  position: absolute;
+  font-size: 2.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.error .error__x {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+.active-error {
+  display: block;
 }/*# sourceMappingURL=style.css.map */

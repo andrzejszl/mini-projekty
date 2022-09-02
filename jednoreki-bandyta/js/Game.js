@@ -10,6 +10,9 @@ class Game {
         window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('span.money').textContent = startMoney;
         })
+        document.querySelector('div.error__x').addEventListener('click', () => {
+            document.querySelector('div.error').classList.remove('active-error')
+        })
     }
 
     render(results) {
@@ -20,6 +23,7 @@ class Game {
     }
 
     playGame() {
+        console.log(typeof this.bidInput.value)
         if (this.canPlay() === true) {
             this.bidInput.value = Number(this.bidInput.value).toFixed();
             let results = draw.draw();
@@ -29,13 +33,19 @@ class Game {
             console.log(gameResult);
             this.wallet.updateMoney(this.bidInput.value, gameResult);
             console.log(typeof this.bidInput.value, this.bidInput.value);
-        } else return alert(this.canPlay())
+        } else return this.showError(this.canPlay())
     }
     canPlay() {
         if (this.bidInput.value < 1) return 'You must bid at least 1$!';
-        // else if (typeof this.bidInput.value !== Number) return 'Invalid input!'
         else if (this.wallet.checkMoney() < Number(this.bidInput.value)) return 'Not enough money!'
         // else if (this.wallet.checkMoney() <= 0) return 'GAME OVER!'
         else return true;
+    }
+    showError(message) {
+        const errorWindow = document.querySelector('div.error');
+        const errorText = document.querySelector('div.error p.error__text');
+        errorText.textContent = message;
+        errorWindow.classList.add('active-error');
+
     }
 }
