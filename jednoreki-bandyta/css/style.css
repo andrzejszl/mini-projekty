@@ -126,6 +126,9 @@ h1.title {
   font-size: 5rem;
   cursor: pointer;
 }
+.error .error__x:hover {
+  font-weight: bold;
+}
 
 .active-error {
   display: block;

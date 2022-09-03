@@ -27,7 +27,13 @@
         right: 5px;
         font-size: 5rem;
         cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
+
+
 }
 
 .active-error {
