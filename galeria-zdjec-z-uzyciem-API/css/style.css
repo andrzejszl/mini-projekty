@@ -464,6 +464,10 @@ p {
   line-height: 1.5;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
   width: 100%;
   max-width: 1000px;
@@ -508,4 +512,26 @@ p {
 .featured-dog__description {
   flex: 1;
   padding: 0 15px;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -15px;
+}
+.tiles .tiles__tile {
+  flex: 0 1 33.33%;
+  padding: 0 15px;
+  margin-bottom: 7.5px;
+}
+.tiles .tiles__tile-content {
+  cursor: pointer;
+  background: teal;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  transition: 0.3s;
+}
+.tiles .tiles__tile-content:hover {
+  background: #004d4d;
 }/*# sourceMappingURL=style.css.map */
