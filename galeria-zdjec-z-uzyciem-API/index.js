@@ -42,13 +42,3 @@ class Dogg {
 }
 
 const doggo = new Dogg()
-
-// const imgTag = document.querySelector('img');
-// listBreeds()
-//     .then(breeds => console.log(breeds))
-
-// getRandomImage()
-//     .then(imgSrc => imgTag.setAttribute('src', imgSrc))
-
-// getRandomImageByBreed('boxer')
-//     .then(imgSrc => imgTag.setAttribute('src', imgSrc))
