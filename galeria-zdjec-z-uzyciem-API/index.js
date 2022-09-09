@@ -46,14 +46,15 @@ class Dogg {
     init() {
         this.showLoading();
         this.getRandomImage()
-            .then(src => {
-                this.imgEl.setAttribute('src', src);
-                this.backgroundEl.style.background = `url('${src}')`;
-                this.hideLoading();
-            })
+            .then(img => this.showImageWhenReady(img))
 
         this.showAllBreeds();
+    }
 
+    showImageWhenReady(src) {
+        this.imgEl.setAttribute('src', src);
+        this.backgroundEl.style.background = `url("${src}")`;
+        this.hideLoading();
     }
 
     addBreed(breed, subBreed) {
@@ -76,13 +77,14 @@ class Dogg {
 
         tileContent.innerText = name;
         tileContent.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
             this.showLoading();
             this.getRandomImageByBreed(type)
-                .then(src => {
-                    this.imgEl.setAttribute('src', src);
-                    this.backgroundEl.style.background = `url("${src}")`;
-                    this.hideLoading();
-                })
+                .then(img => this.showImageWhenReady(img))
         })
         tile.appendChild(tileContent);
         this.tilesEl.appendChild(tile);
