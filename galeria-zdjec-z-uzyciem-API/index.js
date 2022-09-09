@@ -4,8 +4,17 @@ class Dogg {
         this.imgEl = document.querySelector('.featured-dog img');
         this.backgroundEl = document.querySelector('.featured-dog__background');
         this.tilesEl = document.querySelector('.tiles');
+        this.spinnerEl = document.querySelector('.spinner');
 
         this.init()
+    }
+
+    showLoading() {
+        this.spinnerEl.classList.add('spinner--visible');
+    }
+
+    hideLoading() {
+        this.spinnerEl.classList.remove('spinner--visible');
     }
 
     listBreeds() {
@@ -35,13 +44,15 @@ class Dogg {
     }
 
     init() {
+        this.showLoading();
         this.getRandomImage()
             .then(src => {
                 this.imgEl.setAttribute('src', src);
-                this.backgroundEl.style.background = `url('${src}')`
+                this.backgroundEl.style.background = `url('${src}')`;
+                this.hideLoading();
             })
 
-        this.showAllBreeds()
+        this.showAllBreeds();
 
     }
 
@@ -65,10 +76,12 @@ class Dogg {
 
         tileContent.innerText = name;
         tileContent.addEventListener('click', () => {
+            this.showLoading();
             this.getRandomImageByBreed(type)
                 .then(src => {
                     this.imgEl.setAttribute('src', src);
                     this.backgroundEl.style.background = `url("${src}")`;
+                    this.hideLoading();
                 })
         })
         tile.appendChild(tileContent);
