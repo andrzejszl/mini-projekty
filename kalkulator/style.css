@@ -1,0 +1,66 @@
+:root {
+    --buttonSize: 70px;
+    --fontSize: 25px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: calc(var(--fontSize) * 1.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.display {
+    text-align: right;
+    padding: 0 20px;
+    background-color: black;
+    color: white;
+    width: calc(var(--buttonSize) * 4);
+    height: var(--buttonSize);
+    line-height: var(--buttonSize);
+
+}
+
+.controls {
+    font-size: 0;
+    width: calc(var(--buttonSize) * 4);
+}
+
+button {
+    font-family: sans-serif;
+    background-color: #ccc;
+    font-size: var(--fontSize);
+    border: 0;
+    width: var(--buttonSize);
+    height: var(--buttonSize);
+    border: 1px solid black;
+}
+
+button.cancel {
+    width: calc(var(--buttonSize) * 2);
+}
+
+button.num0 {
+    width: calc(var(--buttonSize) * 3);
+}
+
+button:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+button.orange {
+    background-color: rgb(231, 171, 58);
+    color: white;
+}
+
+button.orange:hover {
+    background-color: rgb(251, 191, 78);
+}
