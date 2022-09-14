@@ -64,3 +64,11 @@ button.orange {
 button.orange:hover {
     background-color: rgb(251, 191, 78);
 }
+
+button.darkColor {
+    background-color: #aaa;
+}
+
+button.orange.darkColor {
+    background-color: rgb(211, 151, 38);
+}
