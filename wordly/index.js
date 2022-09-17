@@ -1,8 +1,8 @@
 const wordApiURL = 'https://words.dev-apis.com/word-of-the-day';
 const checkWordUrl = 'https://words.dev-apis.com/validate-word';
 
-const btnDayWord = document.querySelector('button.controls_wordofday');
-const btnRandomWord = document.querySelector('button.controls_randomword');
+const btnDayWord = document.querySelector('div.controls_wordofday');
+const btnRandomWord = document.querySelector('div.controls_randomword');
 const exitButton = document.querySelector('button.message__button');
 
 const inputs = [...document.querySelectorAll('input')];
@@ -18,7 +18,25 @@ let rowMaxIndex = {
     5: 24,
     6: 29
 }
-let answer = getWord();
+let answerWord = getWord(false);
+let answerRandom = getWord(true);
+let mode = 1;
+
+async function getWord(isRandom) {
+    let promise;
+    let response;
+    showLoading();
+    if (isRandom) {
+        promise = await fetch(wordApiURL + "?random=1");
+        response = await promise.json();
+        answerRandom = response.word;
+    } else {
+        promise = await fetch(wordApiURL);
+        response = await promise.json();
+        answerWord = response.word;
+    }
+    hideLoading();
+}
 
 function showWindow(result) {
     let messageWindow = document.querySelector('div.message');
@@ -29,7 +47,11 @@ function showWindow(result) {
         textWindow.innerHTML = "You have won!!!";
         messageWindow.classList.add('visible');
         document.querySelector('div.message__window').style.backgroundColor = "green";
-        answer = getWord("?random=1")
+        answer = answerRandom;
+        getWord(true);
+        mode = 2;
+        btnDayWord.classList.remove('active');
+        btnRandomWord.classList.add('active');
     } else if (result === "loss") {
         btn.innerHTML = "Try again";
         textWindow.innerHTML = "You have lost :((";
@@ -39,29 +61,31 @@ function showWindow(result) {
 }
 
 function hideWindow() {
+    resetGame();
     let messageWindow = document.querySelector('div.message');
     messageWindow.classList.remove('visible');
-    resetGame();
 }
 
 function resetGame() {
     index = 0;
     row = 1;
-    inputs.forEach(input => {
-        input.value = "";
-        input.classList = "";
-    })
+
+    for (i = 0; i < inputs.length; i++) {
+        inputs[i].value = "";
+        inputs[i].classList = "";
+    }
 }
 
-async function getWord(random = "") {
-    const promise = await fetch(wordApiURL + random);
-    console.log(wordApiURL + random);
-    const response = await promise.json();
-    answer = response.word;
-    return answer;
+function showLoading() {
+    document.querySelector('div.loading').classList.add('active');
+}
+
+function hideLoading() {
+    document.querySelector('div.loading').classList.remove('active');
 }
 
 async function checkWord(playerAnswer) {
+    showLoading();
     const promise = await fetch(checkWordUrl, {
         method: "POST",
         body: JSON.stringify({
@@ -71,9 +95,15 @@ async function checkWord(playerAnswer) {
     const response = await promise.json();
     let isValidWord = response.validWord;
     handleAnswer(isValidWord, playerAnswer);
+    hideLoading();
 }
 
 function handleAnswer(isValidWord, playerAnswer) {
+    if (typeof answer === "undefined" && mode === 1) {
+        answer = answerWord;
+    } else if (typeof answer === "undefined" && mode === 2) {
+        answer = answerRandom;
+    }
     let currentRowInputs = [];
     for (let i = rowMaxIndex[row] - 4; i <= rowMaxIndex[row]; i++) {
         currentRowInputs.push(inputs[i])
@@ -83,15 +113,18 @@ function handleAnswer(isValidWord, playerAnswer) {
             currentRowInputs.forEach(input => input.classList.add('correct'));
             showWindow("win");
         } else {
-            currentRowInputs.forEach((input, index) => {
-                if (input.value === answer[index]) {
-                    input.classList.add('correct');
-                } else if (answer.includes(input.value)) {
-                    input.classList.add('includes');
+            for (let i = 0; i < playerAnswer.length; i++) {
+                currentRowInputs[i].value = playerAnswer[i];
+                if (playerAnswer[i] === answer[i]) {
+                    currentRowInputs[i].classList.add('correct');
+                } else if (answer.includes(playerAnswer[i])) {
+                    currentRowInputs[i].classList.add('includes');
+                } else if (!answer.includes(playerAnswer[i])) {
+                    currentRowInputs[i].classList.add('invalid');
                 } else {
-                    input.classList.add('invalid');
+                    console.log('error');
                 }
-            })
+            }
         }
         row++;
         if (row > 6) {
@@ -146,16 +179,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 exitButton.addEventListener('click', hideWindow);
 
-btnRandomWord.addEventListener('click', () => {
-    btnDayWord.classList.remove('active');
-    btnRandomWord.classList.add('active');
-    answer = getWord("?random=1");
+function newGame(random) {
     resetGame();
-});
+    if (random) {
+        answer = answerRandom;
+        getWord(true);
+        mode = 2;
+    } else {
+        answer = answerWord;
+        mode = 1;
+    }
+    document.querySelectorAll('div.controls div').forEach(button => button.classList.remove('active'));
+    event.target.classList.add('active');
+}
 
-btnDayWord.addEventListener('click', () => {
-    btnRandomWord.classList.remove('active');
-    btnDayWord.classList.add('active');
-    answer = getWord();
-    resetGame();
-})
+btnRandomWord.addEventListener('click', function () {
+    newGame(true)
+});
+btnDayWord.addEventListener('click', function () {
+    newGame(false)
+});

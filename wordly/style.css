@@ -89,7 +89,7 @@ div.message__window {
     position: absolute;
     font-size: 2rem;
     font-weight: bold;
-    top: 30%;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -117,11 +117,14 @@ div.message.visible {
 
 div.controls {
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
-.controls button {
+.controls div {
     width: 200px;
     height: 50px;
+    line-height: 50px;
     font-size: 1rem;
     cursor: pointer;
     border: none;
@@ -129,11 +132,11 @@ div.controls {
     margin: 10px;
 }
 
-.controls button:hover {
+.controls div:hover {
     box-shadow: 0 0 2px 2px black;
 }
 
-.controls button.active {
+.controls div.active {
     border: 5px solid black;
 }
 
@@ -155,11 +158,9 @@ div.loading.active {
 }
 
 div.loading__circle {
-
     width: 100px;
     height: 100px;
     border-radius: 50%;
-
     border: solid 10px black;
     border-top-color: transparent;
     border-left-color: transparent;
