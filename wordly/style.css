@@ -31,6 +31,7 @@ input {
     text-align: center;
     margin: 3px;
     text-transform: uppercase;
+    transition: border 0.5s linear;
 }
 
 input:focus {
@@ -39,4 +40,146 @@ input:focus {
 
 input:focus-visible {
     outline: none;
+}
+
+.wrong {
+    border: 4px red solid;
+}
+
+.correct {
+    background-color: green;
+    color: white;
+}
+
+.invalid {
+    background-color: gray;
+    color: white;
+}
+
+.includes {
+    background-color: yellow;
+    color: white;
+}
+
+div.message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.582);
+    /* filter: blur(100px); */
+}
+
+div.message__window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vh;
+    min-width: 300px;
+    min-height: 250px;
+    border: 1px solid black;
+    background-color: grey;
+}
+
+.message__text {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.message__button {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+    background-color: #444;
+}
+
+.message__button:hover {
+    box-shadow: 0 0 2px 2px black;
+}
+
+div.message.visible {
+    display: block;
+}
+
+div.controls {
+    margin-top: 50px;
+}
+
+.controls button {
+    width: 200px;
+    height: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #444;
+    margin: 10px;
+}
+
+.controls button:hover {
+    box-shadow: 0 0 2px 2px black;
+}
+
+.controls button.active {
+    border: 5px solid black;
+}
+
+div.loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ccc;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.loading.active {
+    display: flex;
+}
+
+div.loading__circle {
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    border: solid 10px black;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    background-color: #fff;
+    box-shadow: 0 0 2px 2px #ccc;
+    transform: rotate(0);
+    animation: rotate infinite linear 1s;
+}
+
+.loading__text {
+    font-size: 2rem;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
