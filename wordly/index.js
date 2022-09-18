@@ -119,13 +119,16 @@ function handleAnswer(isValidWord, playerAnswer) {
                 if (playerAnswer[i] === answer[i]) {
                     currentRowInputs[i].classList.add('correct');
                     answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
-                } else if (answer.includes(playerAnswer[i]) && answerClone.includes(playerAnswer[i])) {
+                }
+            }
+            for (let i = 0; i < playerAnswer.length; i++) {
+                if (answer.includes(playerAnswer[i]) && answerClone.includes(playerAnswer[i]) && !currentRowInputs[i].classList.contains('correct')) {
                     currentRowInputs[i].classList.add('includes');
                     answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
-                } else if (!answerClone.includes(playerAnswer[i])) {
+                } else if (!answerClone.includes(playerAnswer[i]) && !currentRowInputs[i].classList.contains('correct')) {
                     currentRowInputs[i].classList.add('invalid');
                 } else {
-                    console.log('error');
+                    //empty
                 }
             }
         }
