@@ -119,11 +119,9 @@ function handleAnswer(isValidWord, playerAnswer) {
                 if (playerAnswer[i] === answer[i]) {
                     currentRowInputs[i].classList.add('correct');
                     answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
-                    console.log(answerClone);
                 } else if (answer.includes(playerAnswer[i]) && answerClone.includes(playerAnswer[i])) {
                     currentRowInputs[i].classList.add('includes');
                     answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
-                    console.log(answerClone);
                 } else if (!answerClone.includes(playerAnswer[i])) {
                     currentRowInputs[i].classList.add('invalid');
                 } else {
