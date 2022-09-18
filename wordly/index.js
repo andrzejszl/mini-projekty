@@ -113,13 +113,18 @@ function handleAnswer(isValidWord, playerAnswer) {
             currentRowInputs.forEach(input => input.classList.add('correct'));
             showWindow("win");
         } else {
+            let answerClone = answer;
             for (let i = 0; i < playerAnswer.length; i++) {
                 currentRowInputs[i].value = playerAnswer[i];
                 if (playerAnswer[i] === answer[i]) {
                     currentRowInputs[i].classList.add('correct');
-                } else if (answer.includes(playerAnswer[i])) {
+                    answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
+                    console.log(answerClone);
+                } else if (answer.includes(playerAnswer[i]) && answerClone.includes(playerAnswer[i])) {
                     currentRowInputs[i].classList.add('includes');
-                } else if (!answer.includes(playerAnswer[i])) {
+                    answerClone = answerClone.slice(0, (answerClone.indexOf(playerAnswer[i]))) + answerClone.slice((answerClone.indexOf(playerAnswer[i])) + 1, answerClone.length);
+                    console.log(answerClone);
+                } else if (!answerClone.includes(playerAnswer[i])) {
                     currentRowInputs[i].classList.add('invalid');
                 } else {
                     console.log('error');
